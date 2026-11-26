@@ -37,7 +37,9 @@ public class HrSyncScheduler implements ApplicationRunner {
     private final Job hrStatusSyncJob;
     private final ApplicationContext context;
 
-    public HrSyncScheduler(JobLauncher jobLauncher, Job hrStatusSyncJob, ApplicationContext context) {
+    public HrSyncScheduler(JobLauncher jobLauncher,
+                           @org.springframework.beans.factory.annotation.Qualifier("hrStatusSyncJob") Job hrStatusSyncJob, // 알림 발송 Job이 추가되어 이름으로 지정
+                           ApplicationContext context) {
         this.jobLauncher = jobLauncher;
         this.hrStatusSyncJob = hrStatusSyncJob;
         this.context = context;

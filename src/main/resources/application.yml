@@ -19,3 +19,6 @@ app:
 cmj:
   batch:
     zone: Asia/Seoul          # 배치 기준 시간대 (예시 값 — 실제 현지 시간대로 바꿔 씀)
+  noti:
+    batch-size: 100           # 알림 발송 배치가 한 번에 보내는 최대 건수 (⚠️ 예시 값)
+    interval-ms: 60000        # 알림 발송 배치 주기 1분 (⚠️ 예시 값)

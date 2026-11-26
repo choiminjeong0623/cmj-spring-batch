@@ -6,6 +6,9 @@
 ## 역할
 Spring Batch. 매일 0시 인사 DB(MS SQL) → 스테이징 테이블 → 한 트랜잭션에서 DELETE + INSERT…SELECT로 TB_HR_EMPLOYEE 전체 교체. 수동 실행 시 --manual --runBy= --baseDate= 로 실행자·기준일 기록.
 
+역할 변경 알림 개선 (✅ 공지 전환 / 🟩 관리자 화면·발송 대기 로직 참여 / 📘 나머지 개선안)
+- 알림 발송 배치(`noti` 패키지): 1분마다 발송 대기 테이블의 READY 건을 최대 N건 발송, `MAIL_SEND_YN=N`이면 중지, 3번 넘게 실패하면 FAILED
+
 ## 빌드
 ```bash
 ./gradlew build
