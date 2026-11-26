@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 /**
  * DB 두 개:
  *  - oracle   : 우리 시스템 DB (TB_HR_EMP_STG·TB_HR_EMPLOYEE를 쓰는 곳, Spring Batch 메타 테이블도 여기)
- *  - hrSqlServer : TRA 내부망의 인사 DB (MS SQL Server, 읽기 전용)
+ *  - hrSqlServer : cmj-choiminjeong 내부망의 인사 DB (MS SQL Server, 읽기 전용)
  */
 @Configuration
 public class DataSourceConfig {

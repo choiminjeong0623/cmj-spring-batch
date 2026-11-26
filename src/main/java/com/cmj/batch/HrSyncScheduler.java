@@ -29,7 +29,9 @@ import java.time.ZoneId;
 @Component
 public class HrSyncScheduler implements ApplicationRunner {
 
-    private static final ZoneId LOCAL_ZONE = ZoneId.of("Africa/Dar_es_Salaam");
+    /** 현지 시간대 — application.yml 의 cmj.batch.zone (예시 값) */
+    @org.springframework.beans.factory.annotation.Value("${cmj.batch.zone}")
+    private ZoneId localZone;
 
     private final JobLauncher jobLauncher;
     private final Job hrStatusSyncJob;
@@ -42,9 +44,9 @@ public class HrSyncScheduler implements ApplicationRunner {
     }
 
     /** 자동 실행: 수행자는 SYSTEM, 처리일자는 오늘 */
-    @Scheduled(cron = "0 0 0 * * *", zone = "Africa/Dar_es_Salaam")
+    @Scheduled(cron = "0 0 0 * * *", zone = "${cmj.batch.zone}")
     public void runNightly() throws Exception {
-        jobLauncher.run(hrStatusSyncJob, params("SCHEDULED", "SYSTEM", LocalDate.now(LOCAL_ZONE).toString()));
+        jobLauncher.run(hrStatusSyncJob, params("SCHEDULED", "SYSTEM", LocalDate.now(localZone).toString()));
     }
 
     /** 수동 실행: 프로그램을 --manual 로 실행했을 때만 바로 한 번 돌리고 종료 */
@@ -54,7 +56,7 @@ public class HrSyncScheduler implements ApplicationRunner {
             return; // 일반 기동이면 스케줄러만 동작
         }
         String runBy = firstOrDefault(args, "runBy", "UNKNOWN");
-        String baseDate = firstOrDefault(args, "baseDate", LocalDate.now(LOCAL_ZONE).toString());
+        String baseDate = firstOrDefault(args, "baseDate", LocalDate.now(localZone).toString());
         jobLauncher.run(hrStatusSyncJob, params("MANUAL", runBy, baseDate));
         System.exit(SpringApplication.exit(context, () -> 0));
     }

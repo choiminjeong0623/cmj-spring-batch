@@ -12,6 +12,10 @@ app:
       username: ${DB_USER}
       password: ${DB_PASSWORD}
     hr:
-      url: jdbc:sqlserver://hr-db.tra.internal:1433;databaseName=HR;encrypt=true
+      url: jdbc:sqlserver://hr-db.cmj-choiminjeong.internal:1433;databaseName=HR;encrypt=true
       username: ${HR_DB_USER}
       password: ${HR_DB_PASSWORD}
+
+cmj:
+  batch:
+    zone: Asia/Seoul          # 배치 기준 시간대 (예시 값 — 실제 현지 시간대로 바꿔 씀)
