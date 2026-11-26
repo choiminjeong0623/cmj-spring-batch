@@ -1,0 +1,17 @@
+spring:
+  batch:
+    job:
+      enabled: false          # 기동 시 자동 실행 끔 — 스케줄러로만 실행
+    jdbc:
+      initialize-schema: never
+
+app:
+  datasource:
+    oracle:
+      url: jdbc:oracle:thin:@//oracle:1521/CMJ
+      username: ${DB_USER}
+      password: ${DB_PASSWORD}
+    hr:
+      url: jdbc:sqlserver://hr-db.tra.internal:1433;databaseName=HR;encrypt=true
+      username: ${HR_DB_USER}
+      password: ${HR_DB_PASSWORD}
